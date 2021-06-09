@@ -8,7 +8,8 @@ public class BooleanCalculatorShould {
 	@ParameterizedTest
 	@ValueSource(strings = {
 			"TRUE",
-			"NOT FALSE"
+			"NOT FALSE",
+			"TRUE AND TRUE"
 	})
 	void shouldBeTrueOn(String input) {
 		BooleanCalculator booleanCalculator = new BooleanCalculator();
