@@ -7,19 +7,6 @@ public class BooleanCalculatorShould {
 
 	@ParameterizedTest
 	@ValueSource(strings = {
-			"FALSE",
-			"NOT TRUE"
-	})
-	void shouldBeFalseOn(String input) {
-		BooleanCalculator booleanCalculator = new BooleanCalculator();
-
-		boolean outcome = booleanCalculator.calculate(input);
-
-		Assertions.assertFalse(outcome);
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {
 			"TRUE",
 			"NOT FALSE"
 	})
@@ -29,6 +16,19 @@ public class BooleanCalculatorShould {
 		boolean outcome = booleanCalculator.calculate(input);
 
 		Assertions.assertTrue(outcome);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"FALSE",
+			"NOT TRUE"
+	})
+	void shouldBeFalseOn(String input) {
+		BooleanCalculator booleanCalculator = new BooleanCalculator();
+
+		boolean outcome = booleanCalculator.calculate(input);
+
+		Assertions.assertFalse(outcome);
 	}
 
 }
