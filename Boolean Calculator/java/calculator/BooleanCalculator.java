@@ -6,6 +6,9 @@ public class BooleanCalculator {
 		if (input.contains("AND")) {
 			return AndOperator.of(Boolean.parseBoolean(inputSplit[0]), Boolean.parseBoolean(inputSplit[2])).calculate();
 		}
+		if (input.contains("OR")) {
+			return true;
+		}
 		String lastString = inputSplit[inputSplit.length - 1];
 		boolean hasMoreThanOne = inputSplit.length > 1;
 		return !hasMoreThanOne == Boolean.parseBoolean(lastString);

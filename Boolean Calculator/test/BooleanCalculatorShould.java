@@ -9,7 +9,8 @@ public class BooleanCalculatorShould {
 	@ValueSource(strings = {
 			"TRUE",
 			"NOT FALSE",
-			"TRUE AND TRUE"
+			"TRUE AND TRUE",
+			"TRUE OR TRUE"
 	})
 	void shouldBeTrueOn(String input) {
 		BooleanCalculator booleanCalculator = new BooleanCalculator();
