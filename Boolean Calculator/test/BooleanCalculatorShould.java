@@ -23,4 +23,14 @@ public class BooleanCalculatorShould {
 
 		Assertions.assertFalse(outcome);
 	}
+
+	@Test
+	void shouldReturnFalseOnNOT_TRUE() {
+		String input = "NOT_TRUE";
+		BooleanCalculator booleanCalculator = new BooleanCalculator();
+
+		boolean outcome = booleanCalculator.calculate(input);
+
+		Assertions.assertFalse(outcome);
+	}
 }
