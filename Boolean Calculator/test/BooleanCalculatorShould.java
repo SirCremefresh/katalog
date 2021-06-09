@@ -24,7 +24,8 @@ public class BooleanCalculatorShould {
 	@ValueSource(strings = {
 			"FALSE",
 			"NOT TRUE",
-			"TRUE AND FALSE"
+			"TRUE AND FALSE",
+			"FALSE OR FALSE",
 	})
 	void shouldBeFalseOn(String input) {
 		BooleanCalculator booleanCalculator = new BooleanCalculator();

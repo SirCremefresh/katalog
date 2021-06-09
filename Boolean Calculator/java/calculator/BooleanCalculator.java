@@ -7,7 +7,7 @@ public class BooleanCalculator {
 			return AndOperator.of(Boolean.parseBoolean(inputSplit[0]), Boolean.parseBoolean(inputSplit[2])).calculate();
 		}
 		if (input.contains("OR")) {
-			return true;
+			return OrOperator.of(Boolean.parseBoolean(inputSplit[0]), Boolean.parseBoolean(inputSplit[2])).calculate();
 		}
 		String lastString = inputSplit[inputSplit.length - 1];
 		boolean hasMoreThanOne = inputSplit.length > 1;
