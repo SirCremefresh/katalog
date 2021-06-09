@@ -26,11 +26,22 @@ public class BooleanCalculatorShould {
 
 	@Test
 	void shouldReturnFalseOnNOT_TRUE() {
-		String input = "NOT_TRUE";
+		String input = "NOT TRUE";
 		BooleanCalculator booleanCalculator = new BooleanCalculator();
 
 		boolean outcome = booleanCalculator.calculate(input);
 
 		Assertions.assertFalse(outcome);
 	}
+
+	@Test
+	void shouldReturnTrueOnNOT_FALSE() {
+		String input = "NOT FALSE";
+		BooleanCalculator booleanCalculator = new BooleanCalculator();
+
+		boolean outcome = booleanCalculator.calculate(input);
+
+		Assertions.assertTrue(outcome);
+	}
+
 }
