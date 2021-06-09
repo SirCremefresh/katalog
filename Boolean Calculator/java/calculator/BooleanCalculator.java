@@ -2,6 +2,9 @@ package calculator;
 
 public class BooleanCalculator {
 	public boolean calculate(String input) {
+		if (input.contains("AND") && input.contains("FALSE")) {
+			return false;
+		}
 		if (input.contains("AND")) {
 			return true;
 		}
