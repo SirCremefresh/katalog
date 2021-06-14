@@ -1,14 +1,14 @@
 package calculator;
 
-class AndOperator {
+class AndOperator implements Calculatable {
 	private boolean result;
 
 	private AndOperator() {
 	}
 
-	static AndOperator of(boolean val1, boolean val2) {
+	static AndOperator of(Calculatable val1, Calculatable val2) {
 		AndOperator andOperator = new AndOperator();
-		andOperator.result = val1 && val2;
+		andOperator.result = val1.calculate() && val2.calculate();
 		return andOperator;
 	}
 

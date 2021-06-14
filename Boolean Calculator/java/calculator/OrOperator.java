@@ -1,18 +1,18 @@
 package calculator;
 
-public class OrOperator {
+public class OrOperator implements Calculatable {
 	private boolean result;
 
 	private OrOperator() {
 	}
 
-	static OrOperator of(boolean val1, boolean val2) {
-		var orOperator = new OrOperator();
-		orOperator.result = val1 && val2;
-		return orOperator;
-	}
-
 	public boolean calculate() {
 		return result;
+	}
+
+	public static Calculatable of(Calculatable val1, Calculatable val2) {
+		var orOperator = new OrOperator();
+		orOperator.result = val1.calculate() || val2.calculate();
+		return orOperator;
 	}
 }
