@@ -13,6 +13,7 @@ public class BooleanCalculatorShould {
 			"TRUE OR TRUE",
 			"TRUE OR TRUE OR TRUE AND FALSE",
 			"TRUE OR FALSE AND NOT FALSE",
+			"((TRUE OR TRUE) OR (TRUE AND FALSE))",
 	})
 	void shouldBeTrueOn(String input) {
 		BooleanCalculator booleanCalculator = new BooleanCalculator();
@@ -29,6 +30,7 @@ public class BooleanCalculatorShould {
 			"TRUE AND FALSE",
 			"FALSE OR FALSE",
 			"(TRUE OR TRUE OR TRUE) AND FALSE",
+			"NOT ((TRUE OR TRUE) OR (TRUE AND FALSE))",
 			"NOT (TRUE AND TRUE)",
 	})
 	void shouldBeFalseOn(String input) {
