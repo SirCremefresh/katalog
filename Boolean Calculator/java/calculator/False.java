@@ -1,6 +1,6 @@
 package calculator;
 
-public class FalseOperator implements Calculatable {
+public class False implements Calculatable {
 
 	@Override
 	public boolean calculate() {

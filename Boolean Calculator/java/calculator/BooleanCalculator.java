@@ -10,11 +10,15 @@ public class BooleanCalculator {
 
 	Calculatable aa(String input) {
 		if (input.equalsIgnoreCase("true")) {
-			return new TrueOperator();
+			return new True();
 		}
 		if (input.equalsIgnoreCase("false")) {
-			return new FalseOperator();
+			return new False();
 		}
+
+//		if (input.startsWith("(")) {
+//
+//		}
 
 		String timeRegex1 = "NOT\s(.+)";
 		Pattern pattern1 = Pattern.compile(timeRegex1);
