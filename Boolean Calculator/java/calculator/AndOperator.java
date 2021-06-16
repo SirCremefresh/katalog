@@ -1,18 +1,20 @@
 package calculator;
 
 class AndOperator implements Calculatable {
-	private boolean result;
+	Calculatable val1;
+	Calculatable val2;
 
 	private AndOperator() {
 	}
 
-	static AndOperator of(Calculatable val1, Calculatable val2) {
-		AndOperator andOperator = new AndOperator();
-		andOperator.result = val1.calculate() && val2.calculate();
-		return andOperator;
+	public static Calculatable of(Calculatable val1, Calculatable val2) {
+		var orOperator = new AndOperator();
+		orOperator.val1 = val1;
+		orOperator.val2 = val2;
+		return orOperator;
 	}
 
 	public boolean calculate() {
-		return result;
+		return val1.calculate() && val2.calculate();
 	}
 }

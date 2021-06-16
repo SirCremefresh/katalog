@@ -23,11 +23,11 @@ public class BooleanCalculator {
 			return notCalculatable.get();
 		}
 
-		String left = null;
+		String left;
 		if (input.startsWith("(")) {
 			int position = getEndingParentecis(input);
 			left = input.substring(1, position);
-			input = input.substring(position + 1);
+			input = input.substring(position + 1).trim();
 		} else {
 			String timeRegex = "(TRUE|FALSE)\s(.+)";
 			Pattern pattern = Pattern.compile(timeRegex);
@@ -43,7 +43,7 @@ public class BooleanCalculator {
 			return GroupOperator.of(aa(left), false);
 		}
 
-		String timeRegex = "\s?(OR|AND)\s(.+)";
+		String timeRegex = "(OR|AND)\s(.+)";
 		Pattern pattern = Pattern.compile(timeRegex);
 		Matcher matcher = pattern.matcher(input);
 		if (matcher.matches()) {

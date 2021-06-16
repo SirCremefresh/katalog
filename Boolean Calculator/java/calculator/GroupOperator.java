@@ -1,16 +1,18 @@
 package calculator;
 
 public class GroupOperator implements Calculatable {
-	boolean result;
+	Calculatable calculatable;
+	boolean not;
 
 	static Calculatable of(Calculatable calculatable, boolean not) {
 		GroupOperator operator = new GroupOperator();
-		operator.result = not != calculatable.calculate();
+		operator.calculatable = calculatable;
+		operator.not = not;
 		return operator;
 	}
 
 	@Override
 	public boolean calculate() {
-		return result;
+		return not != calculatable.calculate();
 	}
 }
