@@ -30,7 +30,7 @@ public class BooleanCalculator {
 				.collect(Collectors.toList());
 	}
 
-	Calculable buildTree(List<Token> tokens) {
+	private Calculable buildTree(final List<Token> tokens) {
 		Token first = tokens.get(0);
 		if (tokens.size() == 1) {
 			return getValueOperator(first).of();
@@ -40,20 +40,21 @@ public class BooleanCalculator {
 		}
 
 		List<Token> left;
+		List<Token> rest;
 		if (first == Token.BRACKET_OPEN) {
 			int closingBracketIndex = getMatchingClosingBracket(tokens);
 			left = tokens.subList(1, closingBracketIndex);
-			tokens = tokens.subList(closingBracketIndex + 1, tokens.size());
+			rest = tokens.subList(closingBracketIndex + 1, tokens.size());
 		} else {
 			left = tokens.subList(0, 1);
-			tokens = tokens.subList(1, tokens.size());
+			rest = tokens.subList(1, tokens.size());
 		}
-		if (tokens.isEmpty()) {
+		if (rest.isEmpty()) {
 			return GroupOperator.of(buildTree(left));
 		}
 
-		Token operator = tokens.get(0);
-		return operatorOfString(operator).of(buildTree(left), buildTree(tokens.subList(1, tokens.size())));
+		Token operator = rest.get(0);
+		return operatorOfString(operator).of(buildTree(left), buildTree(rest.subList(1, rest.size())));
 	}
 
 	private ValueOperator getValueOperator(Token token) {
