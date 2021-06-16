@@ -36,7 +36,7 @@ public class BooleanCalculator {
 			return getValueOperator(first).of();
 		}
 		if (first == Token.NOT) {
-			return NotOperator.of(buildTree(tokens.subList(1, tokens.size())));
+			return NotOperator.of(buildTree(removeFirst(tokens)));
 		}
 
 		var nextBreakIndex = findNextBreakIndex(tokens);
@@ -48,8 +48,12 @@ public class BooleanCalculator {
 			return GroupOperator.of(buildTree(left));
 		}
 
-		Token operator = rest.get(0);
-		return operatorOfString(operator).of(buildTree(left), buildTree(rest.subList(1, rest.size())));
+		CombineOperator combineOperator = getCombineOperator(rest.get(0));
+		return combineOperator.of(buildTree(left), buildTree(removeFirst(rest)));
+	}
+
+	private List<Token> removeFirst(List<Token> rest) {
+		return rest.subList(1, rest.size());
 	}
 
 	private int findNextBreakIndex(List<Token> tokens) {
@@ -88,7 +92,7 @@ public class BooleanCalculator {
 		return closePos;
 	}
 
-	private CombineOperator operatorOfString(Token token) {
+	private CombineOperator getCombineOperator(Token token) {
 		CombineOperator operator = COMBINATION_OPERATORS.get(token);
 		if (operator == null) {
 			throw new IllegalStateException("Could not get CombineOperator for Token. token: " + token);
