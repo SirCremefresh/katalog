@@ -1,6 +1,10 @@
 package calculator;
 
-public class True implements Calculatable {
+class True implements Calculable {
+
+	static Calculable of() {
+		return new True();
+	}
 
 	@Override
 	public boolean calculate() {

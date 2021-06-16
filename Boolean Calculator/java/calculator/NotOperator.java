@@ -1,16 +1,16 @@
 package calculator;
 
-public class NotOperator implements Calculatable {
-	Calculatable calculatable;
+public class NotOperator implements Calculable {
+	Calculable calculable;
 
-	static Calculatable of(Calculatable calculatable) {
+	static Calculable of(Calculable calculable) {
 		NotOperator operator = new NotOperator();
-		operator.calculatable = calculatable;
+		operator.calculable = calculable;
 		return operator;
 	}
 
 	@Override
 	public boolean calculate() {
-		return !calculatable.calculate();
+		return !calculable.calculate();
 	}
 }

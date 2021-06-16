@@ -1,9 +1,9 @@
 package calculator;
 
-public class OrOperator implements Calculatable {
+public class OrOperator implements Calculable {
 	private boolean result;
-	Calculatable val1;
-	Calculatable val2;
+	Calculable val1;
+	Calculable val2;
 	private OrOperator() {
 	}
 
@@ -11,7 +11,7 @@ public class OrOperator implements Calculatable {
 		return val1.calculate() || val2.calculate();
 	}
 
-	public static Calculatable of(Calculatable val1, Calculatable val2) {
+	public static Calculable of(Calculable val1, Calculable val2) {
 		var orOperator = new OrOperator();
 		orOperator.val1 = val1;
 		orOperator.val2 = val2;

@@ -2,9 +2,19 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BooleanCalculator {
+	private final static Map<Token, CombineOperator> COMBINATION_OPERATORS = Map.of(
+			Token.AND, AndOperator::of,
+			Token.OR, OrOperator::of
+	);
+	private final static Map<Token, ValueOperator> VALUE_OPERATOR = Map.of(
+			Token.FALSE, False::of,
+			Token.TRUE, True::of
+	);
+
 	public boolean calculate(String input) {
 		List<Token> tokens = getTokenStream(input);
 
@@ -20,13 +30,10 @@ public class BooleanCalculator {
 				.collect(Collectors.toList());
 	}
 
-	Calculatable buildTree(List<Token> tokens) {
+	Calculable buildTree(List<Token> tokens) {
 		Token first = tokens.get(0);
-		if (tokens.size() == 1 && first == Token.TRUE) {
-			return new True();
-		}
-		if (tokens.size() == 1 && first == Token.FALSE) {
-			return new False();
+		if (tokens.size() == 1) {
+			return getValueOperator(first).of();
 		}
 		if (first == Token.NOT) {
 			return NotOperator.of(buildTree(tokens.subList(1, tokens.size())));
@@ -49,6 +56,14 @@ public class BooleanCalculator {
 		return operatorOfString(operator).of(buildTree(left), buildTree(tokens.subList(1, tokens.size())));
 	}
 
+	private ValueOperator getValueOperator(Token token) {
+		ValueOperator operator = VALUE_OPERATOR.get(token);
+		if (operator == null) {
+			throw new IllegalStateException("Could not get ValueOperator for Token. token: " + token);
+		}
+		return operator;
+	}
+
 	private int getMatchingClosingBracket(List<Token> input) {
 		int closePos = 0;
 		int counter = 1;
@@ -63,11 +78,12 @@ public class BooleanCalculator {
 		return closePos;
 	}
 
-	private CombineOperator operatorOfString(Token operator) {
-		if (operator == Token.AND) {
-			return AndOperator::of;
+	private CombineOperator operatorOfString(Token token) {
+		CombineOperator operator = COMBINATION_OPERATORS.get(token);
+		if (operator == null) {
+			throw new IllegalStateException("Could not get CombineOperator for Token. token: " + token);
 		}
-		return OrOperator::of;
+		return operator;
 	}
 
 }

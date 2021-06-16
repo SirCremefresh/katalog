@@ -1,5 +1,5 @@
 package calculator;
 
 public interface CombineOperator {
-	Calculatable of(Calculatable val1, Calculatable val2);
+	Calculable of(Calculable val1, Calculable val2);
 }

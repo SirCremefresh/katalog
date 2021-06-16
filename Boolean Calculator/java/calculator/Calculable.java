@@ -1,5 +1,5 @@
 package calculator;
 
-public interface Calculatable {
+public interface Calculable {
 	boolean calculate();
 }

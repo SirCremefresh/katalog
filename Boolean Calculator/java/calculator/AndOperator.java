@@ -1,13 +1,13 @@
 package calculator;
 
-class AndOperator implements Calculatable {
-	Calculatable val1;
-	Calculatable val2;
+class AndOperator implements Calculable {
+	Calculable val1;
+	Calculable val2;
 
 	private AndOperator() {
 	}
 
-	public static Calculatable of(Calculatable val1, Calculatable val2) {
+	public static Calculable of(Calculable val1, Calculable val2) {
 		var orOperator = new AndOperator();
 		orOperator.val1 = val1;
 		orOperator.val2 = val2;
