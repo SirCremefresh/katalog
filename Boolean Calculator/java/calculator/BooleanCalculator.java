@@ -39,22 +39,31 @@ public class BooleanCalculator {
 			return NotOperator.of(buildTree(tokens.subList(1, tokens.size())));
 		}
 
-		List<Token> left;
-		List<Token> rest;
-		if (first == Token.BRACKET_OPEN) {
-			int closingBracketIndex = getMatchingClosingBracket(tokens);
-			left = tokens.subList(1, closingBracketIndex);
-			rest = tokens.subList(closingBracketIndex + 1, tokens.size());
-		} else {
-			left = tokens.subList(0, 1);
-			rest = tokens.subList(1, tokens.size());
-		}
+		var nextBreakIndex = findNextBreakIndex(tokens);
+		var startIndex = findExpressionStartIndex(tokens);
+		List<Token> left = tokens.subList(startIndex, nextBreakIndex);
+		List<Token> rest = tokens.subList(startIndex + nextBreakIndex, tokens.size());
+
 		if (rest.isEmpty()) {
 			return GroupOperator.of(buildTree(left));
 		}
 
 		Token operator = rest.get(0);
 		return operatorOfString(operator).of(buildTree(left), buildTree(rest.subList(1, rest.size())));
+	}
+
+	private int findNextBreakIndex(List<Token> tokens) {
+		if (tokens.get(0) == Token.BRACKET_OPEN) {
+			return getMatchingClosingBracket(tokens);
+		}
+		return 1;
+	}
+
+	private int findExpressionStartIndex(List<Token> tokens) {
+		if (tokens.get(0) == Token.BRACKET_OPEN) {
+			return 1;
+		}
+		return 0;
 	}
 
 	private ValueOperator getValueOperator(Token token) {
