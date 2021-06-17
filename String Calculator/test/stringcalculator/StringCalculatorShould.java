@@ -15,6 +15,7 @@ public class StringCalculatorShould {
 			"'1\n2,3', 6",
 			"'1,2\n,3', 6",
 			"'//;\n1\n2;3', 6",
+			"'2,1002', 2",
 	})
 	void returnCalculatedResultForGivenInput(String input, int shouldOutput) {
 		StringCalculator calculator = new StringCalculator();

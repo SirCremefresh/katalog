@@ -16,6 +16,7 @@ public class StringCalculator {
 				.split("[" + delimiters + "]{1,2}"))
 				.filter(value -> !value.isEmpty())
 				.map(Integer::parseInt)
+				.filter(integer -> integer <= 1000)
 				.collect(Collectors.toList());
 
 		assertNoNegativeNumbers(numbers);
