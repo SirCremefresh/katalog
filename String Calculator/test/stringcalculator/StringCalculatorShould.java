@@ -23,4 +23,12 @@ public class StringCalculatorShould {
 
 		Assertions.assertEquals(shouldOutput, realOutput);
 	}
+
+	@Test
+	void throwExceptionOnNegativeNumber() {
+		StringCalculator calculator = new StringCalculator();
+		String input = "1,-2";
+
+		Assertions.assertThrows(RuntimeException.class, () -> calculator.calculate(input));
+	}
 }
