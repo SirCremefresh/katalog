@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,14 +26,22 @@ public class ParsedString {
 		return new ParsedString(additionalDelimiters, inputString.getValue());
 	}
 
-	String getValue() {
+	private String getValue() {
 		return value;
 	}
 
-	String getDelimiterRegex() {
+	private String getDelimiterRegex() {
 		var delimitersString = delimiters.stream()
 				.map(delimiter -> delimiter.replace("\\", "\\\\"))
 				.collect(Collectors.joining());
 		return "[" + delimitersString + "]";
+	}
+
+	List<Integer> parseIntegers() {
+		return Arrays.stream(getValue()
+				.split(getDelimiterRegex()))
+				.filter(value -> !value.isEmpty())
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
 	}
 }

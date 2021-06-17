@@ -1,6 +1,5 @@
 package stringcalculator;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,10 +7,9 @@ public class StringCalculator {
 	public int calculate(String input) {
 		ParsedString parsedString = ParsedString.of(new InputString(input));
 
-		var numbers = Arrays.stream(parsedString.getValue()
-				.split(parsedString.getDelimiterRegex()))
-				.filter(value -> !value.isEmpty())
-				.map(Integer::parseInt)
+		var numbers = parsedString
+				.parseIntegers()
+				.stream()
 				.filter(integer -> integer <= 1000)
 				.collect(Collectors.toList());
 
