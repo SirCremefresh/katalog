@@ -25,4 +25,14 @@ public class StringCalculatorShould {
 		Assertions.assertEquals(1, output);
 	}
 
+	@Test
+	void returnThreeOnOneAndTwoCommaSeperatedString() {
+		String input = "1,2";
+		StringCalculator calculator = new StringCalculator();
+
+		int output = calculator.calculate(input);
+
+		Assertions.assertEquals(3, output);
+	}
+
 }
