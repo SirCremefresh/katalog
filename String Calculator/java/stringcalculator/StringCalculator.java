@@ -9,7 +9,7 @@ public class StringCalculator {
 		String delimiters = ",\n";
 		if (input.startsWith("//[")) {
 			int closingBracket = input.indexOf("]");
-			delimiters += input.substring(3, closingBracket);
+			delimiters += input.substring(3, closingBracket).replace("\\", "\\\\");
 			input = input.substring(closingBracket + 1);
 		} else if (input.startsWith("//")) {
 			delimiters += input.substring(2, 3);
