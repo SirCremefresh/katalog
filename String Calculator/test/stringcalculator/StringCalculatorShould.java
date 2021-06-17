@@ -18,7 +18,7 @@ public class StringCalculatorShould {
 			"'2,1002', 2",
 			"'//[****]\n1\n2****3', 6",
 			"'//[\\]\n1\n2\\3', 6",
-			"'//[*][%]\n1*2%3', 6",
+			"'//[*][%&%][%]\n1*2%&%2%3', 8",
 	})
 	void returnCalculatedResultForGivenInput(String input, int shouldOutput) {
 		StringCalculator calculator = new StringCalculator();
@@ -34,5 +34,13 @@ public class StringCalculatorShould {
 		String input = "1,-2";
 
 		Assertions.assertThrows(RuntimeException.class, () -> calculator.calculate(input));
+	}
+
+	@Test
+	void throwErrorOnNotParsableInput() {
+		StringCalculator calculator = new StringCalculator();
+		String input = "//[*][%&%]\n1*2%&%2%3";
+
+		Assertions.assertThrows(NumberFormatException.class, () -> calculator.calculate(input));
 	}
 }

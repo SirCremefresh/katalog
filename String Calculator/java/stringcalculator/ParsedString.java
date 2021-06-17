@@ -31,9 +31,8 @@ public class ParsedString {
 	}
 
 	private String getDelimiterRegex() {
-		var delimitersString = delimiters.stream()
-				.map(delimiter -> delimiter.replace("\\", "\\\\"))
-				.collect(Collectors.joining());
-		return "[" + delimitersString + "]";
+		return delimiters.stream()
+				.map(delimiter -> delimiter.replaceAll("[\\W]", "\\\\$0"))
+				.collect(Collectors.joining("|"));
 	}
 }
