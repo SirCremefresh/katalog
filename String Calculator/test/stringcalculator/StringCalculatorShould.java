@@ -2,47 +2,24 @@ package stringcalculator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringCalculatorShould {
 
-	@Test
-	void returnZeroOnEmptyString() {
-		String input = "";
+	@ParameterizedTest
+	@CsvSource({
+			"'', 0",
+			"'1', 1",
+			"'1,2', 3",
+			"'1\n2,3', 6",
+			"'1,2\n,3', 6",
+	})
+	void returnCalculatedResultForGivenInput(String input, int shouldOutput) {
 		StringCalculator calculator = new StringCalculator();
 
-		int output = calculator.calculate(input);
+		int realOutput = calculator.calculate(input);
 
-		Assertions.assertEquals(0, output);
+		Assertions.assertEquals(shouldOutput, realOutput);
 	}
-
-	@Test
-	void returnOneOnOneString() {
-		String input = "1";
-		StringCalculator calculator = new StringCalculator();
-
-		int output = calculator.calculate(input);
-
-		Assertions.assertEquals(1, output);
-	}
-
-	@Test
-	void returnThreeOnOneAndTwoCommaSeperatedString() {
-		String input = "1,2";
-		StringCalculator calculator = new StringCalculator();
-
-		int output = calculator.calculate(input);
-
-		Assertions.assertEquals(3, output);
-	}
-
-	@Test
-	void returnSixOnNewlineAndComma() {
-		String input = "1,2\n,3";
-		StringCalculator calculator = new StringCalculator();
-
-		int output = calculator.calculate(input);
-
-		Assertions.assertEquals(6, output);
-	}
-
 }
