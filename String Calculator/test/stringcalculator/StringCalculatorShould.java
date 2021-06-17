@@ -35,4 +35,14 @@ public class StringCalculatorShould {
 		Assertions.assertEquals(3, output);
 	}
 
+	@Test
+	void returnSixOnNewlineAndComma() {
+		String input = "1,2\n,3";
+		StringCalculator calculator = new StringCalculator();
+
+		int output = calculator.calculate(input);
+
+		Assertions.assertEquals(6, output);
+	}
+
 }
