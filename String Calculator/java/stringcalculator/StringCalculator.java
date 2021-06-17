@@ -18,6 +18,15 @@ public class StringCalculator {
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 
+		assertNoNegativeNumbers(numbers);
+
+		return numbers
+				.stream()
+				.mapToInt(Integer::intValue)
+				.sum();
+	}
+
+	private void assertNoNegativeNumbers(List<Integer> numbers) {
 		List<Integer> negativeNumbers = numbers
 				.stream()
 				.filter(number -> number < 0)
@@ -26,10 +35,5 @@ public class StringCalculator {
 		if (!negativeNumbers.isEmpty()) {
 			throw new RuntimeException(negativeNumbers.toString());
 		}
-
-		return numbers
-				.stream()
-				.mapToInt(Integer::intValue)
-				.sum();
 	}
 }
