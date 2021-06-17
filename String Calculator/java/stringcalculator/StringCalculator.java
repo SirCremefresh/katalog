@@ -13,7 +13,7 @@ public class StringCalculator {
 		}
 
 		var numbers = Arrays.stream(input
-				.split("[" + delimiters + "]{1,2}"))
+				.split("[" + delimiters + "]"))
 				.filter(value -> !value.isEmpty())
 				.map(Integer::parseInt)
 				.filter(integer -> integer <= 1000)
