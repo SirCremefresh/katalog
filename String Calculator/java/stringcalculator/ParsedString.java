@@ -17,7 +17,8 @@ public class ParsedString {
 		this.value = value;
 	}
 
-	static ParsedString of(InputString inputString) {
+	static ParsedString of(String input) {
+		var inputString = new InputString(input);
 		List<String> additionalDelimiters = new LinkedList<>();
 		if (inputString.hasAdditionalDelimiter()) {
 			additionalDelimiters = inputString.getDelimiters();
@@ -26,8 +27,12 @@ public class ParsedString {
 		return new ParsedString(additionalDelimiters, inputString.getValue());
 	}
 
-	private String getValue() {
-		return value;
+	List<Integer> parseIntegers() {
+		return Arrays.stream(value
+				.split(getDelimiterRegex()))
+				.filter(value -> !value.isEmpty())
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
 	}
 
 	private String getDelimiterRegex() {
@@ -35,13 +40,5 @@ public class ParsedString {
 				.map(delimiter -> delimiter.replace("\\", "\\\\"))
 				.collect(Collectors.joining());
 		return "[" + delimitersString + "]";
-	}
-
-	List<Integer> parseIntegers() {
-		return Arrays.stream(getValue()
-				.split(getDelimiterRegex()))
-				.filter(value -> !value.isEmpty())
-				.map(Integer::parseInt)
-				.collect(Collectors.toList());
 	}
 }
