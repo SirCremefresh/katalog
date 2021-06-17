@@ -19,12 +19,7 @@ public class ParsedString {
 
 	static ParsedString of(String input) {
 		var inputString = new InputString(input);
-		List<String> additionalDelimiters = new LinkedList<>();
-		if (inputString.hasAdditionalDelimiter()) {
-			additionalDelimiters = inputString.getDelimiters();
-		}
-
-		return new ParsedString(additionalDelimiters, inputString.getValue());
+		return new ParsedString(inputString.getDelimiters(), inputString.getValue());
 	}
 
 	List<Integer> parseIntegers() {

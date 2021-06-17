@@ -3,21 +3,7 @@ package stringcalculator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class InputString {
-	private final String input;
-
-	InputString(String input) {
-		this.input = input;
-	}
-
-	boolean hasAdditionalDelimiter() {
-		return input.startsWith("//");
-	}
-
-	boolean hasMultipleAdditionalDelimiters() {
-		return input.startsWith("//[");
-	}
-
+public record InputString(String input) {
 	String getValue() {
 		if (hasMultipleAdditionalDelimiters()) {
 			return input.substring(input.lastIndexOf("]") + 1);
@@ -36,6 +22,14 @@ public class InputString {
 			return List.of(input.substring(2, 3));
 		}
 		return List.of();
+	}
+
+	private boolean hasAdditionalDelimiter() {
+		return input.startsWith("//");
+	}
+
+	private boolean hasMultipleAdditionalDelimiters() {
+		return input.startsWith("//[");
 	}
 
 	private List<String> parseMultipleDelimiters() {
