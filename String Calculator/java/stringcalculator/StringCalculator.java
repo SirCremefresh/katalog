@@ -5,9 +5,8 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 	public int calculate(String input) {
-		ParsedString parsedString = ParsedString.of(input);
-
-		var numbers = parsedString
+		var numbers = ParsedString
+				.of(input)
 				.parseIntegers()
 				.stream()
 				.filter(integer -> integer <= 1000)
