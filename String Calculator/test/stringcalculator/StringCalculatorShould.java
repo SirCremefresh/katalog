@@ -18,6 +18,7 @@ public class StringCalculatorShould {
 			"'2,1002', 2",
 			"'//[****]\n1\n2****3', 6",
 			"'//[\\]\n1\n2\\3', 6",
+			"'//[*][%]\n1*2%3', 6",
 	})
 	void returnCalculatedResultForGivenInput(String input, int shouldOutput) {
 		StringCalculator calculator = new StringCalculator();

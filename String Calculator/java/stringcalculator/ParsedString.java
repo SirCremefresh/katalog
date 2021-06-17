@@ -16,17 +16,13 @@ public class ParsedString {
 		this.value = value;
 	}
 
-	static ParsedString of(String input) {
+	static ParsedString of(InputString inputString) {
 		List<String> additionalDelimiters = new LinkedList<>();
-		if (input.startsWith("//[")) {
-			int closingBracket = input.indexOf("]");
-			additionalDelimiters.add(input.substring(3, closingBracket).replace("\\", "\\\\"));
-			input = input.substring(closingBracket + 1);
-		} else if (input.startsWith("//")) {
-			additionalDelimiters.add(input.substring(2, 3));
-			input = input.substring(3);
+		if (inputString.hasAdditionalDelimiter()) {
+			additionalDelimiters = inputString.getDelimiters();
 		}
-		return new ParsedString(additionalDelimiters, input);
+
+		return new ParsedString(additionalDelimiters, inputString.getValue());
 	}
 
 	String getValue() {
@@ -34,7 +30,7 @@ public class ParsedString {
 	}
 
 	String getDelimiterRegex() {
-		var delimitersString =  delimiters.stream()
+		var delimitersString = delimiters.stream()
 				.map(delimiter -> delimiter.replace("\\", "\\\\"))
 				.collect(Collectors.joining());
 		return "[" + delimitersString + "]";

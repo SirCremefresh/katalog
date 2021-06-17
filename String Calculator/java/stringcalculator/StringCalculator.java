@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 	public int calculate(String input) {
-		ParsedString parsedString = ParsedString.of(input);
+		ParsedString parsedString = ParsedString.of(new InputString(input));
 
 		var numbers = Arrays.stream(parsedString.getValue()
 				.split(parsedString.getDelimiterRegex()))
