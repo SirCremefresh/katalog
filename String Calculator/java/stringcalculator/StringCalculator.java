@@ -6,18 +6,10 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 	public int calculate(String input) {
-		String delimiters = ",\n";
-		if (input.startsWith("//[")) {
-			int closingBracket = input.indexOf("]");
-			delimiters += input.substring(3, closingBracket).replace("\\", "\\\\");
-			input = input.substring(closingBracket + 1);
-		} else if (input.startsWith("//")) {
-			delimiters += input.substring(2, 3);
-			input = input.substring(3);
-		}
+		ParsedString parsedString = ParsedString.of(input);
 
-		var numbers = Arrays.stream(input
-				.split("[" + delimiters + "]"))
+		var numbers = Arrays.stream(parsedString.getValue()
+				.split(parsedString.getDelimiterRegex()))
 				.filter(value -> !value.isEmpty())
 				.map(Integer::parseInt)
 				.filter(integer -> integer <= 1000)
