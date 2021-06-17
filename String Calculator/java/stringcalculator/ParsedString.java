@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class ParsedString {
 	private static final List<String> DEFAULT_DELIMITERS = List.of(",", "\n");
 
-	private List<String> delimiters = new LinkedList<>();
-	private String value;
+	private final List<String> delimiters = new LinkedList<>();
+	private final String value;
 
 	private ParsedString(List<String> additionalDelimiters, String value) {
 		this.delimiters.addAll(DEFAULT_DELIMITERS);
