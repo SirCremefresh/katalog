@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 	public int calculate(String input) {
 		String delimiters = ",\n";
-		if (input.startsWith("//")) {
+		if (input.startsWith("//[")) {
+			int closingBracket = input.indexOf("]");
+			delimiters += input.substring(3, closingBracket);
+			input = input.substring(closingBracket + 1);
+		} else if (input.startsWith("//")) {
 			delimiters += input.substring(2, 3);
 			input = input.substring(3);
 		}
